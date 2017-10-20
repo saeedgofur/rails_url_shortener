@@ -5,19 +5,20 @@ class Url < ApplicationRecord
   	validates :long_url, format: {with: (URI::regexp(['http', 'https'])), message: "format is not good"}
 
 
-	def short
+	def shorten
+		self.short_url = SecureRandom.hex(3) + rand(0..9).to_s
+		self.save
+		# array = ("0".."9").to_a + ("a".."z").to_a + ("A".."Z").to_a
 
-		array = ("0".."9").to_a + ("a".."z").to_a + ("A".."Z").to_a
+		# @short_url = []
 
-		@short_url = []
+		# 7.times do
+		# 	@short_url << array.sample
+		# end
 
-		7.times do
-			@short_url << array.sample
-		end
-
-		shorten = @short_url.join
+		# short = @short_url.join
 		
-    	return shorten
+  #   	return short
 	end
 
 end
